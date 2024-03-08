@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """pascal module"""
 
+
 def pascal_triangle(n):
     """function definition"""
     if n <= 0:
