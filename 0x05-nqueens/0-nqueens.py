@@ -48,6 +48,7 @@ def nqueens(N):
     solve_nqueens(board, 0, N)
 
 if __name__ == "__main__":
+    """main"""
     if len(sys.argv) != 2:
         print("Usage: nqueens N")
         sys.exit(1)
