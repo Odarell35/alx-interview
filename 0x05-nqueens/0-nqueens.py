@@ -21,7 +21,7 @@ def is_safe(board, row, col, n):
     return True
 
 def solve_nqueens(board, row, n):
-  """solve """
+    """solve """
     if row == n:
         for r in board:
             print(''.join(r))
@@ -35,20 +35,17 @@ def solve_nqueens(board, row, n):
             board[row][col] = '.'
 
 def nqueens(N):
-  """method"""
+    """method"""
     try:
         N = int(N)
     except ValueError:
-        print("N must be a number")
         sys.exit(1)
     
     if N < 4:
-        print("N must be at least 4")
         sys.exit(1)
     
     board = [['.' for _ in range(N)] for _ in range(N)]
     solve_nqueens(board, 0, N)
-
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
@@ -56,3 +53,5 @@ if __name__ == "__main__":
         sys.exit(1)
     
     nqueens(sys.argv[1])
+
+
