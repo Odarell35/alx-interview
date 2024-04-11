@@ -2,6 +2,7 @@
 """Module"""
 import sys
 
+
 def is_safe(board, row, col):
     """Check if there is a queen in the same column"""
     for i in range(row):
@@ -11,6 +12,7 @@ def is_safe(board, row, col):
         if abs(board[i] - col) == abs(i - row):
             return False
     return True
+
 
 def solve_nqueens_util(board, row, n, solutions):
     """method"""
@@ -23,6 +25,7 @@ def solve_nqueens_util(board, row, n, solutions):
             board[row] = col
             solve_nqueens_util(board, row + 1, n, solutions)
             board[row] = -1
+
 
 def solve_nqueens(n):
     """method"""
@@ -41,6 +44,7 @@ def solve_nqueens(n):
 
     for solution in solutions:
         print([[i, solution[i]] for i in range(n)])
+
 
 if __name__ == "__main__":
     """run main"""
