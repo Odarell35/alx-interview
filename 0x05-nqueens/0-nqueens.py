@@ -39,10 +39,10 @@ def nqueens(N):
 
     board = [-1] * N
     solutions = []
-    solve_nqueens_util(board, 0, n, solutions)
+    solve_nqueens_util(board, 0, N, solutions)
 
     for solution in solutions:
-        print([[i, solution[i]] for i in range(n)])
+        print([[i, solution[i]] for i in range(N)])
 
 
 if __name__ == "__main__":
