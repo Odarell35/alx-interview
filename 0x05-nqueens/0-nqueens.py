@@ -28,7 +28,7 @@ def solve_nqueens_util(board, row, n, solutions):
 
 def nqueens(N):
     """method"""
-    if not N.isdigit():
+    if not isinstance(N, int):
         print("N must be a number")
         sys.exit(1)
 
