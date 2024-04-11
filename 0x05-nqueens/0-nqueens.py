@@ -26,19 +26,18 @@ def solve_nqueens_util(board, row, n, solutions):
             solve_nqueens_util(board, row + 1, n, solutions)
             board[row] = -1
 
-
-def solve_nqueens(n):
+def nqueens(N):
     """method"""
-    if not n.isdigit():
+    if not N.isdigit():
         print("N must be a number")
         sys.exit(1)
 
-    n = int(n)
-    if n < 4:
+    N = int(N)
+    if N < 4:
         print("N must be at least 4")
         sys.exit(1)
 
-    board = [-1] * n
+    board = [-1] * N
     solutions = []
     solve_nqueens_util(board, 0, n, solutions)
 
@@ -52,4 +51,10 @@ if __name__ == "__main__":
         print("Usage: nqueens N")
         sys.exit(1)
 
-    solve_nqueens(sys.argv[1])
+    try:
+        N = int(sys.argv[1])
+        nqueens(N)
+    except ValueError:
+        print("N must be a number")
+        sys.exit(1)
+    
