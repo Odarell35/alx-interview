@@ -26,6 +26,7 @@ def solve_nqueens_util(board, row, n, solutions):
             solve_nqueens_util(board, row + 1, n, solutions)
             board[row] = -1
 
+
 def nqueens(N):
     """method"""
     if not isinstance(N, int):
