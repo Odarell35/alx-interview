@@ -1,52 +1,74 @@
 #!/usr/bin/python3
-"""Prime Game Module """
+"""
+PrimeGame Module
+"""
+
 def isWinner(x, nums):
-    """ function that announces winner"""
-    def isPrime(num):
-        """Finds Prime number"""
-        if num <= 1:
-            return False
-        if num <= 3:
-            return True
-        if num % 2 == 0 or num % 3 == 0:
-            return False
-        i = 5
-        while i * i <= num:
-            if num % i == 0 or num % (i + 2) == 0:
-                return False
-            i += 6
-        return True
-    
-    def calculateWinner(n):
-        """calculates winner"""
-        primes = [num for num in range(2, n + 1) if isPrime(num)]
-        primes_set = set(primes)
-        total_numbers = set(range(2, n + 1))
-        maria_turn = True
-        while total_numbers:
-            if maria_turn:
-                for prime in primes:
-                    if prime in total_numbers:
-                        total_numbers -= set(range(prime, n + 1, prime))
-                        maria_turn = False
-                        break
-            else:
-                for num in total_numbers:
-                    if num not in primes_set:
-                        total_numbers.remove(num)
-                        maria_turn = True
-                        break
-        return "Maria" if maria_turn else "Ben"
+    """
+    Determine the winner of a series of rounds of a game between Maria and Ben.
 
-    winners = {"Maria": 0, "Ben": 0}
+    Args:
+        x (int): Number of rounds to be played.
+        nums (list of int): Array of integers representing the ending values for each round.
+
+    Returns:
+        str or None: Name of the player that won the most rounds. Returns 'Maria' or 'Ben'
+        if there's a clear winner. Returns None if the winner cannot be determined.
+
+    Raises:
+        None
+    """
+
+    def isPrime(limit):
+        """
+        Generate prime numbers up to a given limit using the Sieve of Eratosthenes algorithm.
+
+        Args:
+            limit (int): Upper limit for generating prime numbers.
+
+        Returns:
+            list of int: List of prime numbers up to the specified limit.
+
+        Raises:
+            None
+        """
+        primes = []
+        sieve = [True] * (limit + 1)
+        for num in range(2, limit + 1):
+            if sieve[num]:
+                primes.append(num)
+                for multiple in range(num * num, limit + 1, num):
+                    sieve[multiple] = False
+        return primes
+
+    def can_win(n):
+        """
+        Determine if Maria can win for a given value of 'n'.
+
+        Args:
+            n (int): Ending value for a round of the game.
+
+        Returns:
+            bool: True if Maria can win, False otherwise.
+
+        Raises:
+            None
+        """
+        primes = isPrime(n)
+        return len(primes) % 2 == 1
+
+    maria_wins = 0
+    ben_wins = 0
+
     for n in nums:
-        winner = calculateWinner(n)
-        winners[winner] += 1
+        if can_win(n):
+            maria_wins += 1
+        else:
+            ben_wins += 1
 
-    max_wins = max(winners.values())
-    if list(winners.values()).count(max_wins) == 1:
-        return max(winners, key=winners.get)
+    if maria_wins > ben_wins:
+        return "Maria"
+    elif maria_wins < ben_wins:
+        return "Ben"
     else:
         return None
-
-
